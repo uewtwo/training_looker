@@ -20,31 +20,31 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 # }
 
 explore: users {
-  # join: order_items {
-  #   type: left_outer
-  #   sql_on: ${users.id} = ${order_items.user_id} ;;
-  #   relationship: one_to_many
-  # }
+  join: order_items {
+    type: left_outer
+    sql_on: ${users.id} = ${order_items.user_id} ;;
+    relationship: one_to_many
+  }
 
-  # always_filter: {
-  #   filters: {
-  #     field: order_items.created_date
-  #     value: "before today"
-  #   }
-  # }
+  always_filter: {
+    filters: {
+      field: order_items.created_date
+      value: "before today"
+    }
+  }
 
-  # conditionally_filter: {
-  #   filters: {
-  #     field: order_items.created_date
-  #     value: "last 2 years"
-  #   }
-  #   unless: [users.id]
-  # }
+  conditionally_filter: {
+    filters: {
+      field: order_items.created_date
+      value: "last 2 years"
+    }
+    unless: [users.id]
+  }
 }
 
 explore: order_items {
   sql_always_where: ${order_items.returned_date} IS NULL
-                    AND ${order_items.status} = 'complete';;
+                    AND ${order_items.status} = 'Complete';;
   sql_always_having: ${order_items.total_sales} > 200
                     AND ${order_items.count} > 5000;;
 
