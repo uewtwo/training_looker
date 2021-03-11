@@ -25,6 +25,16 @@ explore: users {
     sql_on: ${users.id} = ${order_items.user_id} ;;
     relationship: one_to_many
   }
+  join: user_facts {
+    type: left_outer
+    sql_on: ${users.id} = ${user_facts.user_id} ;;
+    relationship: one_to_one
+  }
+  # join: user_facts_ntd {
+  #   type: left_outer
+  #   sql_on: ${users.id} = ${user_facts_ntd.user_id} ;;
+  #   relationship: one_to_one
+  # }
 
   always_filter: {
     filters: {
